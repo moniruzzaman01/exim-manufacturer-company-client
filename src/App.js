@@ -1,7 +1,27 @@
+import { Route, Routes } from "react-router-dom";
+import Navbar from "./Components/Navbar";
+import Blog from "./Pages/Blog/Blog";
+import Dashboard from "./Pages/Dashboard/Dashboard";
+import Home from "./Pages/Home/Home";
+import Login from "./Pages/Login/Login";
+import Portfolio from "./Pages/Portfolio/Portfolio";
+import Signup from "./Pages/Signup/Signup";
+
 function App() {
   return (
     <div>
-      <button className="btn btn-primary">button</button>
+      <Navbar />
+      <div className=" pt-16">
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/home" element={<Home />}></Route>
+          <Route path="/blog" element={<Blog />}></Route>
+          <Route path="/portfolio" element={<Portfolio />}></Route>
+          <Route path="/dashboard" element={<Dashboard />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/signup" element={<Signup />}></Route>
+        </Routes>
+      </div>
     </div>
   );
 }
