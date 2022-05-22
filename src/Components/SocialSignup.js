@@ -2,9 +2,12 @@ import React, { useEffect } from "react";
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { useLocation, useNavigate } from "react-router-dom";
 import auth from "../firebase.init";
+import useToken from "../hooks/useToken";
 
 const SocialSignup = () => {
   const [gooleSignIn, user, loading, error] = useSignInWithGoogle(auth);
+  const [token] = useToken(user);
+
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state?.from?.pathname || "/";
@@ -12,11 +15,12 @@ const SocialSignup = () => {
   const handleSignIn = () => {
     gooleSignIn();
   };
+
   useEffect(() => {
-    if (user) {
+    if (token) {
       navigate(from, { replace: true });
     }
-  }, [user, from, navigate]);
+  }, [token, from, navigate]);
 
   return (
     <>

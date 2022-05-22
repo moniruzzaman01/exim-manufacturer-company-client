@@ -27,6 +27,7 @@ const Navbar = () => {
             <p
               onClick={() => {
                 signOut(auth);
+                localStorage.removeItem("accessToken");
               }}
             >
               Logout

@@ -6,14 +6,19 @@ import {
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import useToken from "../../hooks/useToken";
 
 const Signup = () => {
-  const [authUser] = useAuthState(auth);
+  // const [authUser] = useAuthState(auth);
   const [createUserWithEmailAndPass, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
   const [updateProfile] = useUpdateProfile(auth);
+  const [token] = useToken(user);
+
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
 
   const handleForm = async (event) => {
     event.preventDefault();
@@ -26,10 +31,10 @@ const Signup = () => {
   };
 
   useEffect(() => {
-    if (user || authUser) {
-      navigate("/");
+    if (token) {
+      navigate(from, { replace: true });
     }
-  }, [authUser, user, navigate]);
+  }, [token, from, navigate]);
 
   return (
     <div className="flex justify-center">
