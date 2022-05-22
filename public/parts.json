@@ -1,10 +1,58 @@
 [
   {
-    "name": "",
+    "name": "Engine",
     "img": "",
-    "desc": "",
-    "min_order_quantity": "",
-    "available_quantity": "",
-    "price_per_piece": ""
+    "desc": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet, itaque!",
+    "min_order_quantity": "1300",
+    "available_quantity": "55000",
+    "price_per_piece": "50"
+  },
+  {
+    "name": "Head Light",
+    "img": "",
+    "desc": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet, itaque!",
+    "min_order_quantity": "1300",
+    "available_quantity": "55000",
+    "price_per_piece": "50"
+  },
+  {
+    "name": "Front Glass",
+    "img": "",
+    "desc": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet, itaque!",
+    "min_order_quantity": "1300",
+    "available_quantity": "55000",
+    "price_per_piece": "50"
+  },
+  {
+    "name": "Silencer",
+    "img": "",
+    "desc": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet, itaque!",
+    "min_order_quantity": "1300",
+    "available_quantity": "55000",
+    "price_per_piece": "50"
+  },
+  {
+    "name": "tyre",
+    "img": "",
+    "desc": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet, itaque!",
+    "min_order_quantity": "1300",
+    "available_quantity": "55000",
+    "price_per_piece": "50"
+  },
+  {
+    "name": "rim",
+    "img": "",
+    "desc": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet, itaque!",
+    "min_order_quantity": "1300",
+    "available_quantity": "55000",
+    "price_per_piece": "50"
+  },
+  {
+    "name": "brake",
+    "img": "",
+    "desc": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet, itaque!",
+    "min_order_quantity": "1300",
+    "available_quantity": "55000",
+    "price_per_piece": "50"
   }
 ]

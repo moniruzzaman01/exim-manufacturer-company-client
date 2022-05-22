@@ -1,7 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Parts = () => {
+  const navigate = useNavigate();
   const a = [1, 2, 3, 4, 5, 6];
+
   return (
     <div className=" px-5">
       <h2 className=" text-center text-primary text-4xl mb-5 uppercase">
@@ -23,7 +26,12 @@ const Parts = () => {
               <p>Availabel_Quantity: 150000</p>
               <p>Price_Per_piece: 200</p>
               <div className="card-actions justify-end">
-                <button className="btn btn-sm btn-primary mt-5">
+                <button
+                  onClick={() => {
+                    navigate("/purchase");
+                  }}
+                  className="btn btn-sm btn-primary mt-5"
+                >
                   Purchase now
                 </button>
               </div>
