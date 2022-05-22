@@ -39,8 +39,8 @@ const AddReview = () => {
 
   return (
     <div className="flex justify-center">
-      <div className=" absolute top-20 w-full max-w-lg">
-        <h2 className=" text-center text-primary text-4xl mb-5 uppercase mt-10">
+      <div className="w-full max-w-lg">
+        <h2 className=" text-center text-primary text-4xl mb-5 uppercase">
           add a review
         </h2>
         <form onSubmit={handleForm}>

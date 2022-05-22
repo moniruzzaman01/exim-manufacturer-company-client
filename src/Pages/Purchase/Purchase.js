@@ -20,11 +20,22 @@ const Purchase = () => {
     event.preventDefault();
     setLoading(true);
     const email = authUser.email;
-    const partsId = parts._id;
-    const quantity = event.target.quantity.value;
+    const mobile = event.target.mobile.value;
     const address = event.target.address.value;
-    const paymentData = { email, partsId, quantity, address };
-    console.log(paymentData);
+    const partsId = parts._id;
+    const partsName = parts.name;
+    const quantity = event.target.quantity.value;
+    const price = parseInt(quantity) * parseInt(parts.price_per_piece);
+    const paymentData = {
+      email,
+      partsId,
+      partsName,
+      price,
+      quantity,
+      mobile,
+      address,
+    };
+    // console.log(paymentData);
 
     await fetch(`http://localhost:5000/purchase`, {
       method: "post",
@@ -93,12 +104,25 @@ const Purchase = () => {
             </div>
             <div className="form-control w-full max-w-lg mt-1">
               <label className="label">
+                <span className="label-text">Mobile:</span>
+              </label>
+              <input
+                required
+                type="text"
+                name="mobile"
+                placeholder="+880"
+                className="input input-bordered input-primary w-full max-w-lg"
+              />
+            </div>
+            <div className="form-control w-full max-w-lg mt-1">
+              <label className="label">
                 <span className="label-text">Quantity:</span>
               </label>
               <input
                 required
                 type="number"
                 name="quantity"
+                placeholder={`Min Quantity ${parts.min_order_quantity}pcs / Available Quantity ${parts.available_quantity}pcs`}
                 className="input input-bordered input-primary w-full max-w-lg"
               />
             </div>
@@ -118,7 +142,7 @@ const Purchase = () => {
                 loading && "loading"
               }`}
             >
-              {loading ? "" : "sign up"}
+              {loading ? "" : "Buy now"}
             </button>
           </form>
         </div>

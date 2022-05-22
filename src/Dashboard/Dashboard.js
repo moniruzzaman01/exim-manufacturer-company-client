@@ -6,10 +6,10 @@ const Dashboard = () => {
     <div className="px-5">
       <div className="drawer drawer-mobile">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content">
+        <div className="drawer-content mt-10 lg:mt-16">
           <label
             htmlFor="my-drawer-2"
-            className="btn btn-sm btn-primary drawer-button lg:hidden"
+            className="btn btn-sm btn-primary drawer-button  lg:hidden flex mb-5"
           >
             Open Sidebar
           </label>
