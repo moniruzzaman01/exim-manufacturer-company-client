@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialSignup from "../../Components/SocialSignup";
 import {
   useAuthState,
@@ -28,12 +28,13 @@ const Login = () => {
 
   useEffect(() => {
     if (token) {
+      console.log(user);
       navigate(from, { replace: true });
     }
   }, [token, from, navigate]);
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center min-h-screen">
       <div className=" absolute top-20 w-full max-w-lg">
         <h2 className=" text-4xl text-primary text-center my-10">Login</h2>
         <form onSubmit={handleForm}>
@@ -67,6 +68,12 @@ const Login = () => {
           >
             {loading ? "" : "sign up"}
           </button>
+          <p className=" mt-2">
+            New to Ex!m?{" "}
+            <Link className=" text-primary" to="/signup">
+              Create account.
+            </Link>
+          </p>
         </form>
         <SocialSignup />
       </div>

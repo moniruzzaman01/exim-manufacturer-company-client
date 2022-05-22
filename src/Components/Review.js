@@ -22,6 +22,7 @@ const Review = () => {
               <h2 className="text-xl mt-2 font-bold text-center">
                 Card title!
               </h2>
+              <p>Ratings: 4.5</p>
               <p>If a dog chews shoes whose shoes does he choose?</p>
             </div>
           </div>

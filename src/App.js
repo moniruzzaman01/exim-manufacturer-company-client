@@ -11,6 +11,7 @@ import Signup from "./Pages/Signup/Signup";
 import MyProfile from "./Dashboard/MyProfile";
 import MyOrder from "./Dashboard/MyOrder";
 import AddReview from "./Dashboard/AddReview";
+import Footer from "./Components/Footer";
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
             <Route path="add-review" element={<AddReview />} />
           </Route>
           <Route
-            path="/purchase"
+            path="/purchase/:partsId"
             element={
               <RequireAuth>
                 <Purchase />
@@ -39,6 +40,7 @@ function App() {
           <Route path="/signup" element={<Signup />}></Route>
         </Routes>
       </div>
+      <Footer />
     </div>
   );
 }

@@ -6,7 +6,7 @@ import {
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useToken from "../../hooks/useToken";
 
 const Signup = () => {
@@ -37,7 +37,7 @@ const Signup = () => {
   }, [token, from, navigate]);
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center min-h-screen">
       <div className=" absolute top-20 w-full max-w-lg">
         <h2 className=" text-4xl text-primary text-center my-10">Signup</h2>
         <form onSubmit={handleForm}>
@@ -80,6 +80,12 @@ const Signup = () => {
           <button className={` btn btn-primary w-full ${loading && "loading"}`}>
             {loading ? "" : "sign up"}
           </button>
+          <p className=" mt-2">
+            Have an account?{" "}
+            <Link className=" text-primary" to="/login">
+              Login
+            </Link>
+          </p>
         </form>
         <SocialSignup />
       </div>
