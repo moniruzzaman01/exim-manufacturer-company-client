@@ -2,7 +2,7 @@ import { async } from "@firebase/util";
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 
@@ -10,6 +10,7 @@ const Purchase = () => {
   const [authUser] = useAuthState(auth);
   const [loading, setLoading] = useState(false);
   const { partsId } = useParams();
+  const navigate = useNavigate();
   const { data: parts, isLoading } = useQuery("partsById", () =>
     fetch(`http://localhost:5000/partsById?id=${partsId}`).then((res) =>
       res.json()
@@ -19,6 +20,7 @@ const Purchase = () => {
   const handleForm = async (event) => {
     event.preventDefault();
     setLoading(true);
+    const userName = authUser.displayName;
     const email = authUser.email;
     const mobile = event.target.mobile.value;
     const address = event.target.address.value;
@@ -27,6 +29,7 @@ const Purchase = () => {
     const quantity = event.target.quantity.value;
     const price = parseInt(quantity) * parseInt(parts.price_per_piece);
     const paymentData = {
+      userName,
       email,
       partsId,
       partsName,
@@ -48,7 +51,10 @@ const Purchase = () => {
       .then((data) => {
         if (data.insertedId) {
           event.target.reset();
-          toast.success("Item Purchase Successfull");
+          toast.success(
+            `Item Purchase Successfull. Please pay for confirm order`
+          );
+          navigate("/dashboard/my-order");
         }
       });
     setLoading(false);
@@ -61,7 +67,7 @@ const Purchase = () => {
   return (
     <div className="flex justify-center px-5 min-h-screen">
       <div>
-        <h2 className=" text-center text-primary text-4xl mb-10 uppercase">
+        <h2 className=" text-center text-primary text-4xl mb-5 uppercase">
           Purchase here
         </h2>
         <div className="card w-fit bg-base-200 shadow-xl">
@@ -74,11 +80,11 @@ const Purchase = () => {
           </div>
         </div>
         <div className="w-full max-w-lg mx-auto">
-          <h2 className=" text-3xl text-primary text-center mt-20 mb-5">
+          <h2 className=" text-3xl text-primary text-center mt-10 mb-0">
             Provide Your Information
           </h2>
           <form onSubmit={handleForm}>
-            <div className="form-control w-full max-w-lg mt-1">
+            <div className="form-control w-full max-w-lg">
               <label className="label">
                 <span className="label-text">Name:</span>
               </label>

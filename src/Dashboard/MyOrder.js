@@ -1,10 +1,12 @@
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
 import auth from "../firebase.init";
 
 const MyOrder = () => {
   const [authUser] = useAuthState(auth);
+  const navigate = useNavigate();
   const { data: purchasedItems, isLoading } = useQuery(
     ["purchased", authUser],
     () =>
@@ -35,13 +37,35 @@ const MyOrder = () => {
           <tbody>
             {purchasedItems.map((item, key) => (
               <tr key={key}>
-                <td>{item.partsName}</td>
+                <td className=" capitalize">{item.partsName}</td>
                 <td>{item.quantity} pcs</td>
-                <td>{item.price}</td>
+                <td>{item.price} tk</td>
                 <td>
-                  <button className="btn btn-success btn-xs text-white">
-                    Pay
-                  </button>
+                  {item.paymentId ? (
+                    <>
+                      <p className=" text-success">Paid</p>{" "}
+                      <small>{item.paymentId}</small>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        onClick={() => {
+                          navigate(`/dashboard/payment/${item._id}`);
+                        }}
+                        className="btn btn-success btn-xs text-white mr-5"
+                      >
+                        Pay
+                      </button>
+                      <button
+                        onClick={() => {
+                          navigate(`/dashboard/payment/${item._id}`);
+                        }}
+                        className="btn btn-error btn-xs text-white"
+                      >
+                        Cancel
+                      </button>
+                    </>
+                  )}
                 </td>
               </tr>
             ))}

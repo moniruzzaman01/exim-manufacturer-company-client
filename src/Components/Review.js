@@ -31,7 +31,7 @@ const Review = () => {
               </h2>
               <p>
                 Ratings:{" "}
-                <span className=" text-xl text-primary">{review.rating}</span>
+                <span className=" text-xl text-White">{review.rating}</span>
               </p>
               <p>{review.message}</p>
             </div>
