@@ -16,7 +16,7 @@ const Parts = () => {
       <h2 className=" text-center text-primary text-4xl mb-5 uppercase">
         all Parts
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {parts.map((part, key) => (
           <div key={key} className="card card-compact  bg-base-200 shadow-xl">
             <figure>

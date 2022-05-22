@@ -2,7 +2,7 @@ import React from "react";
 
 const Portfolio = () => {
   return (
-    <div className=" flex justify-center ">
+    <div className=" flex justify-center min-h-screen ">
       <div className=" absolute top-1/3">
         <div className=" lg:w-fit w-screen bg-base-200 shadow-xl rounded-xl">
           <div className="flex">

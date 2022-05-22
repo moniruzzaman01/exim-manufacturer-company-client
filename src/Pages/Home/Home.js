@@ -4,7 +4,7 @@ import Review from "../../Components/Review";
 
 const Home = () => {
   return (
-    <div className=" grid grid-cols-1 gap-y-10">
+    <div className=" grid grid-cols-1 gap-y-20">
       <Parts />
       <Review />
     </div>

@@ -21,8 +21,8 @@ const Purchase = () => {
         </h2>
         <div className="card w-fit bg-base-200 shadow-xl">
           <div className="card-body">
-            <h2 className="card-title">{parts.name}</h2>
-            <p>{parts.desc}</p>
+            <h2 className=" text-2xl font-bold">Name: {parts.name}</h2>
+            <p>Desc: {parts.desc}</p>
             <p>Min_Order_Quantity: {parts.min_order_quantity}</p>
             <p>Availabel_Quantity: {parts.available_quantity}</p>
             <p>Price_Per_piece: {parts.price_per_piece}</p>
