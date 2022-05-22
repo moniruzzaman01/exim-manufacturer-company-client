@@ -1,7 +1,14 @@
 import React from "react";
+import Parts from "../../Components/Parts";
+import Review from "../../Components/Review";
 
 const Home = () => {
-  return <div></div>;
+  return (
+    <div className=" grid grid-cols-1 gap-y-10">
+      <Parts />
+      <Review />
+    </div>
+  );
 };
 
 export default Home;
