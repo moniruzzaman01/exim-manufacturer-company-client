@@ -28,6 +28,7 @@ const MyOrder = () => {
         <table className="table w-full">
           <thead>
             <tr>
+              <th>#</th>
               <th>Name</th>
               <th>Quantity</th>
               <th>Total Price</th>
@@ -37,6 +38,7 @@ const MyOrder = () => {
           <tbody>
             {purchasedItems.map((item, key) => (
               <tr key={key}>
+                <th>{key + 1}</th>
                 <td className=" capitalize">{item.partsName}</td>
                 <td>{item.quantity} pcs</td>
                 <td>{item.price} tk</td>

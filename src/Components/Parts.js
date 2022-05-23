@@ -30,9 +30,9 @@ const Parts = () => {
             <div className="card-body">
               <h2 className="card-title">{part.name}</h2>
               <p>{part.desc}</p>
-              <p>Min_Order_Quantity: {part.min_order_quantity}</p>
-              <p>Availabel_Quantity: {part.available_quantity}</p>
               <p>Price_Per_piece: {part.price_per_piece}</p>
+              {/* <p>Min_Order_Quantity: {part.min_order_quantity}</p> */}
+              <p>Availabel_Quantity: {part.available_quantity}</p>
               <div className="card-actions justify-end">
                 <button
                   onClick={() => {

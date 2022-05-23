@@ -1,6 +1,6 @@
 import { async } from "@firebase/util";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -8,9 +8,12 @@ const CheckoutForm = ({ clientSecret, item }) => {
   const navigate = useNavigate();
   const stripe = useStripe();
   const elements = useElements();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
+
     if (!stripe || !elements) {
       return;
     }
@@ -24,9 +27,10 @@ const CheckoutForm = ({ clientSecret, item }) => {
     });
     if (error) {
       console.log(error.message);
-    } else {
-      console.log(paymentMethod);
     }
+    // else {
+    //   console.log(paymentMethod);
+    // }
     const { paymentIntent, error: paymentError } =
       await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
@@ -41,7 +45,7 @@ const CheckoutForm = ({ clientSecret, item }) => {
       console.log(paymentError.message);
     } else {
       if (paymentIntent.id) {
-        fetch(`http://localhost:5000/purchaseById/${item._id}`, {
+        await fetch(`http://localhost:5000/purchaseById/${item._id}`, {
           method: "put",
           headers: {
             "content-type": "application/json",
@@ -57,6 +61,7 @@ const CheckoutForm = ({ clientSecret, item }) => {
           });
       }
     }
+    setLoading(false);
   };
 
   return (
@@ -78,11 +83,13 @@ const CheckoutForm = ({ clientSecret, item }) => {
         }}
       />
       <button
-        className=" btn btn-success btn-xs mt-5"
+        className={` btn btn-success btn-sm mt-10 text-white ${
+          loading && "loading"
+        }`}
         type="submit"
         disabled={!stripe || !clientSecret}
       >
-        Pay
+        {loading ? "" : "Pay"}
       </button>
     </form>
   );

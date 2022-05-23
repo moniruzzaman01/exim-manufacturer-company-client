@@ -7,7 +7,9 @@ import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 
 const Purchase = () => {
+  const [disable, setDisable] = useState(false);
   const [authUser] = useAuthState(auth);
+  const [quantity, setQuantity] = useState(null);
   const [loading, setLoading] = useState(false);
   const { partsId } = useParams();
   const navigate = useNavigate();
@@ -20,43 +22,52 @@ const Purchase = () => {
   const handleForm = async (event) => {
     event.preventDefault();
     setLoading(true);
-    const userName = authUser.displayName;
-    const email = authUser.email;
-    const mobile = event.target.mobile.value;
-    const address = event.target.address.value;
-    const partsId = parts._id;
-    const partsName = parts.name;
-    const quantity = event.target.quantity.value;
-    const price = parseInt(quantity) * parseInt(parts.price_per_piece);
-    const paymentData = {
-      userName,
-      email,
-      partsId,
-      partsName,
-      price,
-      quantity,
-      mobile,
-      address,
-    };
-    // console.log(paymentData);
 
-    await fetch(`http://localhost:5000/purchase`, {
-      method: "post",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(paymentData),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.insertedId) {
-          event.target.reset();
-          toast.success(
-            `Item Purchase Successfull. Please pay for confirm order`
-          );
-          navigate("/dashboard/my-order");
-        }
-      });
+    const minQ = parseInt(parts.min_order_quantity);
+    const maxQ = parseInt(parts.available_quantity);
+    if (quantity >= minQ && quantity <= maxQ) {
+      const userName = authUser.displayName;
+      const email = authUser.email;
+      const mobile = event.target.mobile.value;
+      const address = event.target.address.value;
+      const partsId = parts._id;
+      const partsName = parts.name;
+      // const quantity = event.target.quantity.value;
+      const price = parseInt(quantity) * parseInt(parts.price_per_piece);
+      const paymentData = {
+        userName,
+        email,
+        partsId,
+        partsName,
+        price,
+        // quantity,
+        mobile,
+        address,
+      };
+      // console.log(paymentData);
+
+      await fetch(`http://localhost:5000/purchase`, {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(paymentData),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.insertedId) {
+            event.target.reset();
+            toast.success(
+              `Item Purchase Successfull. Please pay for confirm order`
+            );
+            navigate("/dashboard/my-order");
+          }
+        });
+    } else {
+      setDisable(true);
+      toast.error("You have to order in our order range");
+    }
+
     setLoading(false);
   };
 
@@ -128,7 +139,13 @@ const Purchase = () => {
                 required
                 type="number"
                 name="quantity"
-                placeholder={`Min Quantity ${parts.min_order_quantity}pcs / Available Quantity ${parts.available_quantity}pcs`}
+                onKeyUp={(event) => {
+                  setQuantity(parseInt(event.target.value));
+                  setDisable(false);
+                }}
+                defaultChecked={parseInt(parts.min_order_quantity)}
+                placeholder={`min Quantity: ${parts.min_order_quantity}`}
+                // placeholder={`Min Quantity ${parts.min_order_quantity}pcs / Available Quantity ${parts.available_quantity}pcs`}
                 className="input input-bordered input-primary w-full max-w-lg"
               />
             </div>
@@ -144,6 +161,7 @@ const Purchase = () => {
               ></textarea>
             </div>
             <button
+              disabled={disable}
               className={` btn btn-primary mt-10 w-full ${
                 loading && "loading"
               }`}
