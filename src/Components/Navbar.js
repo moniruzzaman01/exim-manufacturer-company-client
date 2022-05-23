@@ -85,11 +85,11 @@ const Navbar = () => {
         onClick={() => navigate("/dashboard")}
         className="avatar placeholder cursor-pointer"
       >
-        <div className="bg-white rounded-full w-12">
+        {/* <div className="bg-white rounded-full w-12">
           <span className="text-3xl text-black font-bold">
             {authUser?.displayName[0]}
           </span>
-        </div>
+        </div> */}
       </div>
     </div>
   );

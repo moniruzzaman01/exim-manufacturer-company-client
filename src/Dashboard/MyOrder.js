@@ -1,3 +1,4 @@
+import { signOut } from "firebase/auth";
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useQuery } from "react-query";
@@ -17,9 +18,20 @@ const MyOrder = () => {
     isLoading,
     refetch,
   } = useQuery(["purchased", authUser], () =>
-    fetch(`http://localhost:5000/purchase?email=${authUser?.email}`).then(
-      (res) => res.json()
-    )
+    fetch(`http://localhost:5000/purchase?email=${authUser?.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((res) => {
+      if (res.status === 200) {
+        return res.json();
+      } else {
+        localStorage.removeItem("accessToken");
+        signOut(auth);
+        navigate("/login");
+        toast.error(`${res.statusText} Access!!! Please Login again`);
+      }
+    })
   );
 
   const handleDelete = (answer) => {

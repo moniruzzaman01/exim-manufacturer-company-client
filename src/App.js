@@ -26,7 +26,14 @@ function App() {
           <Route path="/home" element={<Home />}></Route>
           <Route path="/blog" element={<Blog />}></Route>
           <Route path="/portfolio" element={<Portfolio />}></Route>
-          <Route path="/dashboard" element={<Dashboard />}>
+          <Route
+            path="/dashboard"
+            element={
+              <RequireAuth>
+                <Dashboard />
+              </RequireAuth>
+            }
+          >
             <Route index element={<MyProfile />} />
             <Route path="my-order" element={<MyOrder />} />
             <Route path="add-review" element={<AddReview />} />
