@@ -30,28 +30,25 @@ const Parts = () => {
           parts.slice(0, 6).map((part, key) => (
             <div key={key} className="card card-compact  bg-base-200 shadow-xl">
               <figure>
-                <img
-                  src="https://api.lorem.space/image/shoes?w=400&h=225"
-                  width={400}
-                  height={225}
-                  alt="Shoes"
-                />
+                <img src={part.img} width={400} height={225} alt="Shoes" />
               </figure>
-              <div className="card-body">
-                <h2 className="card-title">{part.name}</h2>
-                <p>{part.desc}</p>
-                <p>Price_Per_piece: {part.price_per_piece}</p>
-                {/* <p>Min_Order_Quantity: {part.min_order_quantity}</p> */}
-                <p>Availabel_Quantity: {part.available_quantity}</p>
-                <div className="card-actions justify-end">
-                  <button
-                    onClick={() => {
-                      navigate(`/purchase/${part._id}`);
-                    }}
-                    className="btn btn-sm btn-primary mt-5"
-                  >
-                    Purchase now
-                  </button>
+              <div className="card-body justify-end">
+                <div>
+                  <h2 className="card-title">{part.name}</h2>
+                  <p>{part.desc}</p>
+                  <p>Price_Per_piece: {part.price_per_piece}</p>
+                  {/* <p>Min_Order_Quantity: {part.min_order_quantity}</p> */}
+                  <p>Availabel_Quantity: {part.available_quantity}</p>
+                  <div className="card-actions justify-end">
+                    <button
+                      onClick={() => {
+                        navigate(`/purchase/${part._id}`);
+                      }}
+                      className="btn btn-sm btn-primary mt-5"
+                    >
+                      Purchase now
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

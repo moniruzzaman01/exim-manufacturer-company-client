@@ -22,7 +22,7 @@ import ManageProduct from "./Dashboard/ManageProduct";
 
 function App() {
   return (
-    <div>
+    <div className=" lg:max-w-7xl mx-auto">
       <Navbar />
       <div className=" pt-16">
         <Routes>
