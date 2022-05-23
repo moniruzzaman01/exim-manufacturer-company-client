@@ -1,22 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import ConfirmModal from "../Components/ConfirmModal";
+import Loading from "../Components/Loading";
 import auth from "../firebase.init";
 
 const MyOrder = () => {
   const [authUser] = useAuthState(auth);
   const navigate = useNavigate();
-  const { data: purchasedItems, isLoading } = useQuery(
-    ["purchased", authUser],
-    () =>
-      fetch(`http://localhost:5000/purchase?email=${authUser?.email}`).then(
-        (res) => res.json()
-      )
+  const [modal, setModal] = useState(false);
+  const [deleteId, setDeleteId] = useState("");
+  const {
+    data: purchasedItems,
+    isLoading,
+    refetch,
+  } = useQuery(["purchased", authUser], () =>
+    fetch(`http://localhost:5000/purchase?email=${authUser?.email}`).then(
+      (res) => res.json()
+    )
   );
 
+  const handleDelete = (answer) => {
+    if (answer) {
+      console.log(deleteId);
+      fetch(`http://localhost:5000/purchaseById/${deleteId}`, {
+        method: "delete",
+        headers: {
+          "content-type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.acknowledged) {
+            refetch();
+          }
+        });
+    }
+  };
+
   if (isLoading) {
-    return;
+    return <Loading />;
   }
 
   return (
@@ -36,44 +61,50 @@ const MyOrder = () => {
             </tr>
           </thead>
           <tbody>
-            {purchasedItems.map((item, key) => (
-              <tr key={key}>
-                <th>{key + 1}</th>
-                <td className=" capitalize">{item.partsName}</td>
-                <td>{item.quantity} pcs</td>
-                <td>{item.price} tk</td>
-                <td>
-                  {item.paymentId ? (
-                    <>
-                      <p className=" text-success">Paid</p>{" "}
-                      <small>{item.paymentId}</small>
-                    </>
-                  ) : (
-                    <>
-                      <button
-                        onClick={() => {
-                          navigate(`/dashboard/payment/${item._id}`);
-                        }}
-                        className="btn btn-success btn-xs text-white mr-5"
-                      >
-                        Pay
-                      </button>
-                      <button
-                        onClick={() => {
-                          navigate(`/dashboard/payment/${item._id}`);
-                        }}
-                        className="btn btn-error btn-xs text-white"
-                      >
-                        Cancel
-                      </button>
-                    </>
-                  )}
-                </td>
-              </tr>
-            ))}
+            {purchasedItems &&
+              purchasedItems.map((item, key) => (
+                <tr key={key}>
+                  <th>{key + 1}</th>
+                  <td className=" capitalize">{item.partsName}</td>
+                  <td>{item.quantity} pcs</td>
+                  <td>{item.price} tk</td>
+                  <td>
+                    {item.paymentId ? (
+                      <>
+                        <p className=" text-success">Paid</p>{" "}
+                        <small>{item.paymentId}</small>
+                      </>
+                    ) : (
+                      <>
+                        <button
+                          onClick={() => {
+                            navigate(`/dashboard/payment/${item._id}`);
+                          }}
+                          className="btn btn-success btn-xs text-white mr-5"
+                        >
+                          Pay
+                        </button>
+                        <label
+                          htmlFor="confirmation-modal"
+                          onClick={() => {
+                            setModal(true);
+                            setDeleteId(item._id);
+                          }}
+                          className="btn btn-error btn-xs text-white"
+                        >
+                          Cancel
+                        </label>
+                      </>
+                    )}
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
+      {modal && (
+        <ConfirmModal setModal={setModal} handleDelete={handleDelete} />
+      )}
     </div>
   );
 };

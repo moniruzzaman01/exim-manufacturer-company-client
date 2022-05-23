@@ -1,11 +1,12 @@
 import { signOut } from "firebase/auth";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import auth from "../firebase.init";
 
 const Navbar = () => {
   const [authUser] = useAuthState(auth);
+  const navigate = useNavigate();
 
   const navMenuItems = (
     <>
@@ -47,7 +48,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar bg-base-100 fixed z-10">
+    <div className="navbar bg-base-100 fixed z-10 justify-around">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex="0" className="btn btn-ghost lg:hidden">
@@ -79,6 +80,16 @@ const Navbar = () => {
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal p-0">{navMenuItems}</ul>
+      </div>
+      <div
+        onClick={() => navigate("/dashboard")}
+        className="avatar placeholder cursor-pointer"
+      >
+        <div className="bg-white rounded-full w-12">
+          <span className="text-3xl text-black font-bold">
+            {authUser?.displayName[0]}
+          </span>
+        </div>
       </div>
     </div>
   );

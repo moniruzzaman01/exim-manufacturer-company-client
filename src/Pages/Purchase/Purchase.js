@@ -4,6 +4,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import Loading from "../../Components/Loading";
 import auth from "../../firebase.init";
 
 const Purchase = () => {
@@ -58,21 +59,21 @@ const Purchase = () => {
           if (data.insertedId) {
             event.target.reset();
             toast.success(
-              `Item Purchase Successfull. Please pay for confirm order`
+              `Item Purchased Successfull. Please pay for confirm order`
             );
             navigate("/dashboard/my-order");
           }
         });
     } else {
       setDisable(true);
-      toast.error("You have to order in our order range");
+      toast.error("You have to place order in our given range");
     }
 
     setLoading(false);
   };
 
   if (isLoading) {
-    return;
+    return <Loading />;
   }
 
   return (
