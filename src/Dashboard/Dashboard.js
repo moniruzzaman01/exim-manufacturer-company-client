@@ -1,7 +1,31 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../firebase.init";
+import Loading from "../Components/Loading";
+import { useQuery } from "react-query";
+import { toast } from "react-toastify";
 
 const Dashboard = () => {
+  const [authUser] = useAuthState(auth);
+
+  const {
+    data: user,
+    isLoading,
+    error,
+  } = useQuery(["usersByEmail", authUser?.email], () =>
+    fetch(`http://localhost:5000/usersByEmail?email=${authUser?.email}`).then(
+      (res) => res.json()
+    )
+  );
+
+  if (error) {
+    toast.error(error.message);
+  }
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <div className="px-5">
       <div className="drawer drawer-mobile">
@@ -21,12 +45,32 @@ const Dashboard = () => {
             <li>
               <Link to="/dashboard">My Profile</Link>
             </li>
-            <li>
-              <Link to="/dashboard/my-order">My Order</Link>
-            </li>
-            <li>
-              <Link to="/dashboard/add-review">Add Review</Link>
-            </li>
+            {user.role === "admin" || (
+              <>
+                <li>
+                  <Link to="/dashboard/my-order">My Order</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/add-review">Add Review</Link>
+                </li>
+              </>
+            )}
+            {user.role === "admin" && (
+              <>
+                <li>
+                  <Link to="/dashboard/manage-all-order">Manage All Order</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/add-product">Add Product</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/make-admin">Make Admin</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/manage-product">Manage Product</Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

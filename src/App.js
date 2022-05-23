@@ -15,6 +15,10 @@ import Footer from "./Components/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Payment from "./Dashboard/Payment";
+import ManageAllorder from "./Dashboard/ManageAllorder";
+import AddProduct from "./Dashboard/AddProduct";
+import MakeAdmin from "./Dashboard/MakeAdmin";
+import ManageProduct from "./Dashboard/ManageProduct";
 
 function App() {
   return (
@@ -37,6 +41,10 @@ function App() {
             <Route index element={<MyProfile />} />
             <Route path="my-order" element={<MyOrder />} />
             <Route path="add-review" element={<AddReview />} />
+            <Route path="manage-all-order" element={<ManageAllorder />} />
+            <Route path="add-product" element={<AddProduct />} />
+            <Route path="make-admin" element={<MakeAdmin />} />
+            <Route path="manage-product" element={<ManageProduct />} />
             <Route path="payment/:id" element={<Payment />} />
           </Route>
           <Route

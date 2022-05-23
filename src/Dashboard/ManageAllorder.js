@@ -8,7 +8,7 @@ import ConfirmModal from "../Components/ConfirmModal";
 import Loading from "../Components/Loading";
 import auth from "../firebase.init";
 
-const MyOrder = () => {
+const ManageAllorder = () => {
   const [authUser] = useAuthState(auth);
   const navigate = useNavigate();
   const [modal, setModal] = useState(false);
@@ -18,7 +18,7 @@ const MyOrder = () => {
     isLoading,
     refetch,
   } = useQuery(["purchased", authUser], () =>
-    fetch(`http://localhost:5000/purchaseByEmail?email=${authUser?.email}`, {
+    fetch(`http://localhost:5000/purchase`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -33,10 +33,8 @@ const MyOrder = () => {
       }
     })
   );
-
   const handleDelete = (answer) => {
     if (answer) {
-      console.log(deleteId);
       fetch(`http://localhost:5000/purchaseById/${deleteId}`, {
         method: "delete",
         headers: {
@@ -59,7 +57,7 @@ const MyOrder = () => {
   return (
     <div>
       <h2 className=" text-center text-primary text-4xl mb-5 uppercase">
-        My Order
+        Manage all order
       </h2>
       <div className="overflow-x-auto w-full">
         <table className="table w-full">
@@ -88,14 +86,14 @@ const MyOrder = () => {
                       </>
                     ) : (
                       <>
-                        <button
+                        {/* <button
                           onClick={() => {
                             navigate(`/dashboard/payment/${item._id}`);
                           }}
                           className="btn btn-success btn-xs text-white mr-5"
                         >
                           Pay
-                        </button>
+                        </button> */}
                         <label
                           htmlFor="confirmation-modal"
                           onClick={() => {
@@ -104,7 +102,7 @@ const MyOrder = () => {
                           }}
                           className="btn btn-error btn-xs text-white"
                         >
-                          Cancel
+                          Delete
                         </label>
                       </>
                     )}
@@ -121,4 +119,4 @@ const MyOrder = () => {
   );
 };
 
-export default MyOrder;
+export default ManageAllorder;
