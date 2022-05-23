@@ -17,7 +17,7 @@ const ManageAllorder = () => {
     data: purchasedItems,
     isLoading,
     refetch,
-  } = useQuery(["purchased", authUser], () =>
+  } = useQuery(["manageallorder", authUser], () =>
     fetch(`http://localhost:5000/purchase`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

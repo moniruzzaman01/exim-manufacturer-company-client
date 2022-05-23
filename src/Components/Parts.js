@@ -27,7 +27,7 @@ const Parts = () => {
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {parts &&
-          parts.map((part, key) => (
+          parts.slice(0, 6).map((part, key) => (
             <div key={key} className="card card-compact  bg-base-200 shadow-xl">
               <figure>
                 <img
