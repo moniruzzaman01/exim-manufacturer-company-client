@@ -1,5 +1,6 @@
 import React from "react";
 import Carousel from "../../Components/Carousel";
+import Contact from "../../Components/Contact";
 import Parts from "../../Components/Parts";
 import Review from "../../Components/Review";
 
@@ -9,6 +10,7 @@ const Home = () => {
       <Carousel />
       <Parts />
       <Review />
+      <Contact />
     </div>
   );
 };

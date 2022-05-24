@@ -65,7 +65,7 @@ const Login = () => {
           <button
             className={` btn btn-primary mt-10 w-full ${loading && "loading"}`}
           >
-            {loading ? "" : "sign up"}
+            {loading ? "" : "Login"}
           </button>
           <p className=" mt-2">
             New to Ex!m?{" "}

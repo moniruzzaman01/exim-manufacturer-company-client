@@ -21,7 +21,7 @@ const Review = () => {
   }
 
   return (
-    <div className=" px-5 mb-20">
+    <div className=" px-5">
       <h2 className=" text-center text-primary text-4xl mb-5 uppercase">
         customer review
       </h2>
