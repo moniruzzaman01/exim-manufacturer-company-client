@@ -23,17 +23,17 @@ const Carousel = () => {
           <img src={images[3]} className="w-full" alt="" />
         </div>
       </div>
-      <div className="flex justify-center w-full py-2 gap-2">
-        <a href="#item1" className="btn btn-xs">
+      <div className="flex justify-center w-full pt-4 gap-5">
+        <a href="#item1" className="btn btn-sm bg-white text-black font-bold">
           1
         </a>
-        <a href="#item2" className="btn btn-xs">
+        <a href="#item2" className="btn btn-sm bg-white text-black font-bold">
           2
         </a>
-        <a href="#item3" className="btn btn-xs">
+        <a href="#item3" className="btn btn-sm bg-white text-black font-bold">
           3
         </a>
-        <a href="#item4" className="btn btn-xs">
+        <a href="#item4" className="btn btn-sm bg-white text-black font-bold">
           4
         </a>
       </div>
