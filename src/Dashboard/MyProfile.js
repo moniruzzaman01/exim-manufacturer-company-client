@@ -9,6 +9,7 @@ import auth from "../firebase.init";
 const MyProfile = () => {
   const [loading, setLoading] = useState(false);
   const [authUser] = useAuthState(auth);
+  const [disable, setDisable] = useState(true);
 
   const {
     data: user,
@@ -75,7 +76,6 @@ const MyProfile = () => {
               <span className="label-text">Your Name:</span>
             </label>
             <input
-              required
               type="text"
               value={user.name || "none"}
               disabled
@@ -87,7 +87,6 @@ const MyProfile = () => {
               <span className="label-text">Your Email:</span>
             </label>
             <input
-              required
               type="email"
               value={user.email}
               disabled
@@ -99,7 +98,6 @@ const MyProfile = () => {
               <span className="label-text">Role:</span>
             </label>
             <input
-              required
               type="text"
               value={user.role}
               disabled
@@ -111,6 +109,7 @@ const MyProfile = () => {
               <span className="label-text">Mobile:</span>
             </label>
             <input
+              onChange={() => setDisable(false)}
               required
               type="text"
               defaultValue={user.mobile}
@@ -121,6 +120,7 @@ const MyProfile = () => {
           </div>
 
           <button
+            disabled={disable}
             className={` btn btn-primary w-full mt-10 ${loading && "loading"}`}
           >
             {loading ? "" : "Update"}
