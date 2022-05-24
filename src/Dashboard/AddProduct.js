@@ -76,10 +76,14 @@ const AddProduct = () => {
               {...register("name", {
                 required: true,
               })}
-              required
               type="text"
               className="input input-bordered input-primary w-full max-w-lg"
             />
+            {errors.name?.type === "required" && (
+              <span className="label-text text-red-500">
+                Enter a product name !
+              </span>
+            )}
           </div>
           <div className="form-control w-full max-w-lg">
             <label className="label">
@@ -91,6 +95,11 @@ const AddProduct = () => {
               })}
               className="textarea textarea-primary w-full max-w-lg"
             ></textarea>
+            {errors.desc?.type === "required" && (
+              <span className="label-text text-red-500">
+                Enter a short description !
+              </span>
+            )}
           </div>
           <div className="form-control w-full max-w-lg mt-1">
             <label className="label">
@@ -103,6 +112,11 @@ const AddProduct = () => {
               type="number"
               className="input input-bordered input-primary w-full max-w-lg"
             />
+            {errors.minQ?.type === "required" && (
+              <span className="label-text text-red-500">
+                Enter a min quantity number !
+              </span>
+            )}
           </div>
           <div className="form-control w-full max-w-lg mt-1">
             <label className="label">
@@ -115,6 +129,11 @@ const AddProduct = () => {
               type="number"
               className="input input-bordered input-primary w-full max-w-lg"
             />
+            {errors.availQ?.type === "required" && (
+              <span className="label-text text-red-500">
+                Enter a available quantity number !
+              </span>
+            )}
           </div>
           <div className="form-control w-full max-w-lg mt-1">
             <label className="label">
@@ -127,6 +146,11 @@ const AddProduct = () => {
               type="number"
               className="input input-bordered input-primary w-full max-w-lg"
             />
+            {errors.netPrice?.type === "required" && (
+              <span className="label-text text-red-500">
+                Enter the price of product !
+              </span>
+            )}
           </div>
           <div className="form-control w-full max-w-lg mt-10">
             <input
@@ -136,6 +160,9 @@ const AddProduct = () => {
               type="file"
               className="input w-full max-w-lg"
             />
+            {errors.image?.type === "required" && (
+              <span className="label-text text-red-500">Enter an image !</span>
+            )}
           </div>
           <button
             className={` mt-10 btn btn-primary w-full ${loading && "loading"}`}
