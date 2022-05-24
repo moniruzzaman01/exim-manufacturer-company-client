@@ -5,26 +5,32 @@ import auth from "../firebase.init";
 import Loading from "../Components/Loading";
 import { useQuery } from "react-query";
 import { toast } from "react-toastify";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
   const [authUser] = useAuthState(auth);
+  const [isAdmin, loading] = useAdmin(authUser);
 
-  const {
-    data: user,
-    isLoading,
-    error,
-  } = useQuery(["usersByEmail", authUser?.email], () =>
-    fetch(
-      `https://damp-eyrie-12250.herokuapp.com/usersByEmail?email=${authUser?.email}`
-    ).then((res) => res.json())
-  );
+  if (loading) {
+    return;
+  }
 
-  if (error) {
-    toast.error(error.message);
-  }
-  if (isLoading) {
-    return <Loading />;
-  }
+  // const {
+  //   data: user,
+  //   isLoading,
+  //   error,
+  // } = useQuery(["usersByEmail", authUser?.email], () =>
+  //   fetch(
+  //     `https://damp-eyrie-12250.herokuapp.com/usersByEmail?email=${authUser?.email}`
+  //   ).then((res) => res.json())
+  // );
+
+  // if (error) {
+  //   toast.error(error.message);
+  // }
+  // if (isLoading) {
+  //   return <Loading />;
+  // }
 
   return (
     <div className="px-5">
@@ -45,7 +51,7 @@ const Dashboard = () => {
             <li>
               <Link to="/dashboard">My Profile</Link>
             </li>
-            {user.role === "admin" || (
+            {isAdmin || (
               <>
                 <li>
                   <Link to="/dashboard/my-order">My Order</Link>
@@ -55,7 +61,7 @@ const Dashboard = () => {
                 </li>
               </>
             )}
-            {user.role === "admin" && (
+            {isAdmin && (
               <>
                 <li>
                   <Link to="/dashboard/manage-all-order">Manage All Order</Link>
