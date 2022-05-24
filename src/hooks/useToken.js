@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 const useToken = (user) => {
   const [token, setToken] = useState("");
 
+  const name = user?.user?.displayName;
   useEffect(() => {
     const email = user?.user?.email;
     if (email) {
@@ -10,7 +11,7 @@ const useToken = (user) => {
         name: user?.user?.displayName,
         email: user.user.email,
       };
-      fetch(`http://localhost:5000/users?email=${email}`, {
+      fetch(`https://damp-eyrie-12250.herokuapp.com/users?email=${email}`, {
         method: "put",
         headers: {
           "content-type": "application/json",
@@ -23,7 +24,7 @@ const useToken = (user) => {
           localStorage.setItem("accessToken", data.accessToken);
         });
     }
-  }, [user]);
+  }, [user, name]);
 
   return [token];
 };

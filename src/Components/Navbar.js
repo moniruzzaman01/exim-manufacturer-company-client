@@ -49,7 +49,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="sticky top-0 z-10">
+    <div className="sticky top-0 z-50">
       <div className="navbar bg-base-200 flex justify-between ">
         <div className="navbar-start">
           <div className="dropdown">

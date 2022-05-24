@@ -14,7 +14,8 @@ const MyProfile = () => {
     data: user,
     isLoading,
     error,
-  } = useQuery(["usersByEmail", authUser?.email], () =>
+    refetch,
+  } = useQuery(["updateUserInfo", authUser?.email], () =>
     fetch(
       `https://damp-eyrie-12250.herokuapp.com/usersByEmail?email=${authUser?.email}`
     ).then((res) => res.json())
@@ -44,6 +45,7 @@ const MyProfile = () => {
       .then((data) => {
         if (data.acknowledged) {
           toast.success("Updated");
+          refetch();
         }
       });
     event.target.reset();
@@ -58,7 +60,7 @@ const MyProfile = () => {
         </h2>
         <div className="card w-full max-w-lg bg-base-200 shadow-xl mx-auto">
           <div className="card-body">
-            <p>Name:{user.name}</p>
+            <p>Name: {user.name}</p>
             <p>Email: {user.email} </p>
             <p>Role: {user.role || "user"} </p>
             <p>Mobile: {user.mobile || "none"} </p>
@@ -111,6 +113,7 @@ const MyProfile = () => {
             <input
               required
               type="text"
+              defaultValue={user.mobile}
               name="mobile"
               placeholder="Mobile"
               className="input input-bordered input-primary w-full max-w-lg"
