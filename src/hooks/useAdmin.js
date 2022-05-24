@@ -1,10 +1,7 @@
 import { useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { useQuery } from "react-query";
-import auth from "../firebase.init";
 
-const useAdmin = () => {
-  const [authUser] = useAuthState(auth);
+const useAdmin = ({ authUser }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -19,14 +16,16 @@ const useAdmin = () => {
   if (isLoading) {
     return;
   }
-  if (user) {
-    setLoading(false);
-  }
+  console.log("admin", user);
+  // if (user) {
+  //   setLoading(false);
+  // }
   if (user.role === "admin") {
+    setIsAdmin(true);
     console.log("admin");
   }
 
-  //   return [isAdmin, loading];
+  return [isAdmin, loading];
 };
 
 export default useAdmin;

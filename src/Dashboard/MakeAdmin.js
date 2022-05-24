@@ -10,7 +10,7 @@ import auth from "../firebase.init";
 const MakeAdmin = () => {
   const navigate = useNavigate();
   const [modal, setModal] = useState(false);
-  const [deleteId, setDeleteId] = useState("");
+  const [makeAdminId, setDeleteId] = useState("");
   const {
     data: users,
     isLoading,
@@ -34,8 +34,8 @@ const MakeAdmin = () => {
 
   const handleAdmin = (answer) => {
     if (answer) {
-      console.log(deleteId);
-      fetch(`http://localhost:5000/usersById?id=${deleteId}`, {
+      console.log(makeAdminId);
+      fetch(`http://localhost:5000/usersById?id=${makeAdminId}`, {
         method: "put",
         headers: {
           "content-type": "application/json",

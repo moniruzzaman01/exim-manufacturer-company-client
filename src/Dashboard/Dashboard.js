@@ -14,9 +14,9 @@ const Dashboard = () => {
     isLoading,
     error,
   } = useQuery(["usersByEmail", authUser?.email], () =>
-    fetch(`http://localhost:5000/usersByEmail?email=${authUser?.email}`).then(
-      (res) => res.json()
-    )
+    fetch(
+      `https://damp-eyrie-12250.herokuapp.com/usersByEmail?email=${authUser?.email}`
+    ).then((res) => res.json())
   );
 
   if (error) {
