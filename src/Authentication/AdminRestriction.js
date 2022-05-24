@@ -4,7 +4,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import auth from "../firebase.init";
 import useAdmin from "../hooks/useAdmin";
 
-const RequireAdmin = ({ children }) => {
+const AdminRestriction = ({ children }) => {
   const [authUser, authLoading] = useAuthState(auth);
   const [isAdmin, loading] = useAdmin(authUser);
   const location = useLocation();
@@ -13,7 +13,7 @@ const RequireAdmin = ({ children }) => {
     return;
   }
 
-  if (!isAdmin) {
+  if (isAdmin) {
     return (
       <Navigate to="/dashboard" state={{ from: location }} replace></Navigate>
     );
@@ -21,4 +21,4 @@ const RequireAdmin = ({ children }) => {
   return children;
 };
 
-export default RequireAdmin;
+export default AdminRestriction;

@@ -20,6 +20,7 @@ import AddProduct from "./Dashboard/AddProduct";
 import MakeAdmin from "./Dashboard/MakeAdmin";
 import ManageProduct from "./Dashboard/ManageProduct";
 import RequireAdmin from "./Authentication/RequireAdmin";
+import AdminRestriction from "./Authentication/AdminRestriction";
 
 function App() {
   return (
@@ -40,8 +41,22 @@ function App() {
             }
           >
             <Route index element={<MyProfile />} />
-            <Route path="my-order" element={<MyOrder />} />
-            <Route path="add-review" element={<AddReview />} />
+            <Route
+              path="my-order"
+              element={
+                <AdminRestriction>
+                  <MyOrder />
+                </AdminRestriction>
+              }
+            />
+            <Route
+              path="add-review"
+              element={
+                <AdminRestriction>
+                  <AddReview />
+                </AdminRestriction>
+              }
+            />
             <Route
               path="manage-all-order"
               element={
