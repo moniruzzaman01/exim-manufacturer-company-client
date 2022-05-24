@@ -82,7 +82,7 @@ const Purchase = () => {
         <h2 className=" text-center text-primary text-4xl mb-5 uppercase">
           Purchase here
         </h2>
-        <div className="card w-fit bg-base-200 shadow-xl">
+        <div className="card w-fit bg-base-100 shadow-xl">
           <div className="card-body">
             <h2 className=" text-2xl font-bold">Name: {parts.name}</h2>
             <p>Desc: {parts.desc}</p>
@@ -122,18 +122,6 @@ const Purchase = () => {
             </div>
             <div className="form-control w-full max-w-lg mt-1">
               <label className="label">
-                <span className="label-text">Mobile:</span>
-              </label>
-              <input
-                required
-                type="text"
-                name="mobile"
-                placeholder="+880"
-                className="input input-bordered input-primary w-full max-w-lg"
-              />
-            </div>
-            <div className="form-control w-full max-w-lg mt-1">
-              <label className="label">
                 <span className="label-text">Quantity:</span>
               </label>
               <input
@@ -146,7 +134,18 @@ const Purchase = () => {
                 }}
                 defaultChecked={parseInt(parts.min_order_quantity)}
                 placeholder={`min Quantity: ${parts.min_order_quantity}`}
-                // placeholder={`Min Quantity ${parts.min_order_quantity}pcs / Available Quantity ${parts.available_quantity}pcs`}
+                className="input input-bordered input-primary w-full max-w-lg"
+              />
+            </div>
+            <div className="form-control w-full max-w-lg mt-1">
+              <label className="label">
+                <span className="label-text">Mobile:</span>
+              </label>
+              <input
+                required
+                type="text"
+                name="mobile"
+                placeholder="+880"
                 className="input input-bordered input-primary w-full max-w-lg"
               />
             </div>

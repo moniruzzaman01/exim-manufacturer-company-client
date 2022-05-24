@@ -158,7 +158,7 @@ const AddProduct = () => {
                 required: true,
               })}
               type="file"
-              className="input w-full max-w-lg"
+              className="w-full max-w-lg"
             />
             {errors.image?.type === "required" && (
               <span className="label-text text-red-500">Enter an image !</span>

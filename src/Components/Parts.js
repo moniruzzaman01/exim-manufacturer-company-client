@@ -30,7 +30,7 @@ const Parts = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {parts &&
           parts.slice(0, 6).map((part, key) => (
-            <div key={key} className="card card-compact  bg-base-200 shadow-xl">
+            <div key={key} className="card card-compact  bg-base-100 shadow-xl">
               <figure>
                 <img src={part.img} width={400} height={225} alt="Shoes" />
               </figure>
@@ -41,7 +41,9 @@ const Parts = () => {
                   <p className=" pb-1">
                     Price_Per_piece: {part.price_per_piece}
                   </p>
-                  {/* <p className=" pb-1">Min_Order_Quantity: {part.min_order_quantity}</p> */}
+                  <p className=" pb-1">
+                    Min_Order_Quantity: {part.min_order_quantity}
+                  </p>
                   <p className=" pb-1">
                     Availabel_Quantity: {part.available_quantity}
                   </p>

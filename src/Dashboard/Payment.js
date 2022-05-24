@@ -44,7 +44,7 @@ const Payment = () => {
         <h2 className=" text-center text-primary text-4xl mb-10 uppercase">
           Please pay to confirm
         </h2>
-        <div className="card max-w-lg bg-base-200 shadow-xl">
+        <div className="card max-w-lg bg-base-100 shadow-xl">
           <div className="card-body">
             <Elements stripe={stripePromise}>
               <CheckoutForm item={item} clientSecret={clientSecret} />

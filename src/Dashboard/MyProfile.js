@@ -62,7 +62,7 @@ const MyProfile = () => {
         <h2 className=" text-center text-primary text-4xl mb-5 uppercase">
           My Profile
         </h2>
-        <div className="card w-full max-w-lg bg-base-200 shadow-xl mx-auto">
+        <div className="card w-full max-w-lg bg-base-100 shadow-xl mx-auto">
           <div className="card-body">
             <p>Name: {user.name}</p>
             <p>Email: {user.email} </p>
@@ -96,17 +96,17 @@ const MyProfile = () => {
               className="input input-bordered input-primary w-full max-w-lg"
             />
           </div>
-          <div className="form-control w-full max-w-lg mt-1">
+          {/* <div className="form-control w-full max-w-lg mt-1">
             <label className="label">
               <span className="label-text">Role:</span>
             </label>
             <input
               type="text"
-              value={user.role}
+              value={user.role || "user"}
               disabled
               className="input input-bordered input-primary w-full max-w-lg"
             />
-          </div>
+          </div> */}
           <div className="form-control w-full max-w-lg mt-1">
             <label className="label">
               <span className="label-text">Mobile:</span>

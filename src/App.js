@@ -22,6 +22,7 @@ import ManageProduct from "./Dashboard/ManageProduct";
 import RequireAdmin from "./Authentication/RequireAdmin";
 import AdminRestriction from "./Authentication/AdminRestriction";
 import "./App.css";
+import NotFound from "./Components/NotFound";
 
 function App() {
   return (
@@ -102,6 +103,7 @@ function App() {
           ></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
+          <Route path="*" element={<NotFound />}></Route>
         </Routes>
         <ToastContainer />
       </div>

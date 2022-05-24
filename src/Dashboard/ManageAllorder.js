@@ -83,7 +83,17 @@ const ManageAllorder = () => {
                       {item.paymentId ? (
                         <>
                           <p className=" text-success">Paid</p>{" "}
-                          <small>{item.paymentId}</small>
+                          <small className=" block">{item.paymentId}</small>
+                          <label
+                            htmlFor="confirmation-modal"
+                            onClick={() => {
+                              setModal(true);
+                              setDeleteId(item._id);
+                            }}
+                            className="btn btn-error btn-xs text-white"
+                          >
+                            Delete
+                          </label>
                         </>
                       ) : (
                         <>

@@ -8,7 +8,7 @@ const Carousel = () => {
     "https://i.ibb.co/BZC8f8s/carousel1-1.jpg",
   ];
   return (
-    <div>
+    <div className=" mt-[-65px]">
       <div className="carousel lg:h-[60vh] w-full">
         <div id="item1" className="carousel-item w-full">
           <img src={images[2]} className="w-full" alt="" />
