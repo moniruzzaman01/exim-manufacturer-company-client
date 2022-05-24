@@ -9,7 +9,9 @@ const Review = () => {
     isLoading,
     error,
   } = useQuery("reviews", () =>
-    fetch(`http://localhost:5000/review`).then((res) => res.json())
+    fetch(`https://damp-eyrie-12250.herokuapp.com/review`).then((res) =>
+      res.json()
+    )
   );
   if (error) {
     toast.error(error.message);

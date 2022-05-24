@@ -15,9 +15,9 @@ const Purchase = () => {
   const { partsId } = useParams();
   const navigate = useNavigate();
   const { data: parts, isLoading } = useQuery("partsById", () =>
-    fetch(`http://localhost:5000/partsById?id=${partsId}`).then((res) =>
-      res.json()
-    )
+    fetch(
+      `https://damp-eyrie-12250.herokuapp.com/partsById?id=${partsId}`
+    ).then((res) => res.json())
   );
 
   const handleForm = async (event) => {
@@ -47,7 +47,7 @@ const Purchase = () => {
       };
       // console.log(paymentData);
 
-      await fetch(`http://localhost:5000/purchase`, {
+      await fetch(`https://damp-eyrie-12250.herokuapp.com/purchase`, {
         method: "post",
         headers: {
           "content-type": "application/json",

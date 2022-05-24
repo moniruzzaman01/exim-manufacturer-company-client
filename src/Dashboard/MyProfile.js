@@ -35,13 +35,16 @@ const MyProfile = () => {
 
     const mobile = event.target.mobile.value;
 
-    await fetch(`http://localhost:5000/usersByEmail?email=${user.email}`, {
-      method: "put",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ mobile }),
-    })
+    await fetch(
+      `https://damp-eyrie-12250.herokuapp.com/usersByEmail?email=${user.email}`,
+      {
+        method: "put",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ mobile }),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {

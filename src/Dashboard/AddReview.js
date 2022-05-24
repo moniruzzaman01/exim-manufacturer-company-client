@@ -20,7 +20,7 @@ const AddReview = () => {
       message,
     };
 
-    await fetch(`http://localhost:5000/review`, {
+    await fetch(`https://damp-eyrie-12250.herokuapp.com/review`, {
       method: "post",
       headers: {
         "content-type": "application/json",

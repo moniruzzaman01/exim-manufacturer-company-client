@@ -18,11 +18,14 @@ const MyOrder = () => {
     isLoading,
     refetch,
   } = useQuery(["purchased", authUser], () =>
-    fetch(`http://localhost:5000/purchaseByEmail?email=${authUser?.email}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    }).then((res) => {
+    fetch(
+      `https://damp-eyrie-12250.herokuapp.com/purchaseByEmail?email=${authUser?.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    ).then((res) => {
       if (res.status === 200) {
         return res.json();
       } else {
@@ -37,7 +40,7 @@ const MyOrder = () => {
   const handleDelete = (answer) => {
     if (answer) {
       console.log(deleteId);
-      fetch(`http://localhost:5000/purchaseById/${deleteId}`, {
+      fetch(`https://damp-eyrie-12250.herokuapp.com/purchaseById/${deleteId}`, {
         method: "delete",
         headers: {
           "content-type": "application/json",

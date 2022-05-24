@@ -42,7 +42,7 @@ const AddProduct = () => {
             price_per_piece,
           };
 
-          fetch(`http://localhost:5000/parts`, {
+          fetch(`https://damp-eyrie-12250.herokuapp.com/parts`, {
             method: "post",
             headers: {
               "content-type": "application/json",

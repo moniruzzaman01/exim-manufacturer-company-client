@@ -15,14 +15,14 @@ const Payment = () => {
   const [clientSecret, setClientSecret] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:5000/purchaseById/${id}`)
+    fetch(`https://damp-eyrie-12250.herokuapp.com/purchaseById/${id}`)
       .then((res) => res.json())
       .then((data) => setItem(data));
   }, [id]);
 
   useEffect(() => {
     if (item.price) {
-      fetch("http://localhost:5000/create-payment-intent", {
+      fetch("https://damp-eyrie-12250.herokuapp.com/create-payment-intent", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(item),

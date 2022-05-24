@@ -45,13 +45,16 @@ const CheckoutForm = ({ clientSecret, item }) => {
       console.log(paymentError.message);
     } else {
       if (paymentIntent.id) {
-        await fetch(`http://localhost:5000/purchaseById/${item._id}`, {
-          method: "put",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({ paymentId: paymentIntent.id }),
-        })
+        await fetch(
+          `https://damp-eyrie-12250.herokuapp.com/purchaseById/${item._id}`,
+          {
+            method: "put",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify({ paymentId: paymentIntent.id }),
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.acknowledged) {

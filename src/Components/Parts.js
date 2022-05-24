@@ -11,7 +11,9 @@ const Parts = () => {
     isLoading,
     error,
   } = useQuery("parts", () =>
-    fetch(`http://localhost:5000/parts`).then((res) => res.json())
+    fetch(`https://damp-eyrie-12250.herokuapp.com/parts`).then((res) =>
+      res.json()
+    )
   );
   if (error) {
     toast.error(error.message);

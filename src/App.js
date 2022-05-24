@@ -21,10 +21,11 @@ import MakeAdmin from "./Dashboard/MakeAdmin";
 import ManageProduct from "./Dashboard/ManageProduct";
 import RequireAdmin from "./Authentication/RequireAdmin";
 import AdminRestriction from "./Authentication/AdminRestriction";
+import "./App.css";
 
 function App() {
   return (
-    <div className=" lg:max-w-7xl mx-auto">
+    <div className="bg lg:max-w-7xl mx-auto">
       <Navbar />
       <div className=" pt-16">
         <Routes>

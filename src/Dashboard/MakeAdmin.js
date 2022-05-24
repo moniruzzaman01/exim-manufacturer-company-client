@@ -16,7 +16,7 @@ const MakeAdmin = () => {
     isLoading,
     refetch,
   } = useQuery(["user"], () =>
-    fetch(`http://localhost:5000/users`, {
+    fetch(`https://damp-eyrie-12250.herokuapp.com/users`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -35,12 +35,15 @@ const MakeAdmin = () => {
   const handleAdmin = (answer) => {
     if (answer) {
       // console.log(makeAdminId);
-      fetch(`http://localhost:5000/usersById?id=${makeAdminId}`, {
-        method: "put",
-        headers: {
-          "content-type": "application/json",
-        },
-      })
+      fetch(
+        `https://damp-eyrie-12250.herokuapp.com/usersById?id=${makeAdminId}`,
+        {
+          method: "put",
+          headers: {
+            "content-type": "application/json",
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           // console.log(data);
@@ -56,49 +59,53 @@ const MakeAdmin = () => {
   }
 
   return (
-    <div>
-      <h2 className=" text-center text-primary text-4xl mb-5 uppercase">
-        make admin
-      </h2>
-      <div className="overflow-x-auto w-full">
-        <table className="table w-full">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users &&
-              users.map((user, key) => (
-                <tr key={key}>
-                  <th>{key + 1}</th>
-                  <td className=" capitalize">{user.name}</td>
-                  <td>{user.email}</td>
-                  <td>
-                    {user.role === "admin" ? (
-                      "Admin"
-                    ) : (
-                      <label
-                        htmlFor="confirmation-modal"
-                        onClick={() => {
-                          setModal(true);
-                          setDeleteId(user._id);
-                        }}
-                        className="btn btn-success btn-xs text-white"
-                      >
-                        Make Admin
-                      </label>
-                    )}
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
+    <div className=" flex justify-center">
+      <div className=" lg:pl-5 w-full">
+        <h2 className=" text-center text-primary text-4xl mb-5 uppercase">
+          make admin
+        </h2>
+        <div className="overflow-x-auto w-full">
+          <table className="table w-full">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users &&
+                users.map((user, key) => (
+                  <tr key={key}>
+                    <th>{key + 1}</th>
+                    <td className=" capitalize">{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>
+                      {user.role === "admin" ? (
+                        "Admin"
+                      ) : (
+                        <label
+                          htmlFor="confirmation-modal"
+                          onClick={() => {
+                            setModal(true);
+                            setDeleteId(user._id);
+                          }}
+                          className="btn btn-success btn-xs text-white"
+                        >
+                          Make Admin
+                        </label>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
+        {modal && (
+          <ConfirmModal setModal={setModal} handleDelete={handleAdmin} />
+        )}
       </div>
-      {modal && <ConfirmModal setModal={setModal} handleDelete={handleAdmin} />}
     </div>
   );
 };
