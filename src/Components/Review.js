@@ -30,7 +30,9 @@ const Review = () => {
               <div className="card-body text-center">
                 <div className="avatar placeholder justify-center">
                   <div className="bg-neutral-focus text-neutral-content rounded-full w-24">
-                    <span className="text-3xl">{review.name[0]}</span>
+                    <span className="text-3xl uppercase font-bold">
+                      {review.name[0]}
+                    </span>
                   </div>
                 </div>
                 <h2 className="text-xl mt-2 font-bold text-center">

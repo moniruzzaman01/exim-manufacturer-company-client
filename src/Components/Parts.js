@@ -34,11 +34,15 @@ const Parts = () => {
               </figure>
               <div className="card-body justify-end">
                 <div>
-                  <h2 className="card-title">{part.name}</h2>
-                  <p>{part.desc}</p>
-                  <p>Price_Per_piece: {part.price_per_piece}</p>
-                  {/* <p>Min_Order_Quantity: {part.min_order_quantity}</p> */}
-                  <p>Availabel_Quantity: {part.available_quantity}</p>
+                  <h2 className="card-title pb-3">{part.name}</h2>
+                  <p className=" pb-1">{part.desc}</p>
+                  <p className=" pb-1">
+                    Price_Per_piece: {part.price_per_piece}
+                  </p>
+                  {/* <p className=" pb-1">Min_Order_Quantity: {part.min_order_quantity}</p> */}
+                  <p className=" pb-1">
+                    Availabel_Quantity: {part.available_quantity}
+                  </p>
                   <div className="card-actions justify-end">
                     <button
                       onClick={() => {
